@@ -10,6 +10,7 @@ public class Ticket {
     private double price;
     private Date inTime;
     private Date outTime;
+    private  boolean IsLoyal = false;
 
     public int getId() {
         return id;
@@ -58,4 +59,15 @@ public class Ticket {
     public void setOutTime(Date outTime) {
         this.outTime = outTime;
     }
+    
+    public boolean getIsLoyal() {
+        return IsLoyal;
+    }
+    
+    public void  setIsLoyal(boolean IsLoyal) {
+    	this.IsLoyal = IsLoyal;
+    
+    }
+    
 }
+

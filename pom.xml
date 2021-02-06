@@ -109,7 +109,8 @@
                         <goals>
                             <goal>test</goal>
                         </goals>
-                        <phase>integration-test</phase>
+                    <!--      <phase>integration-test</phase>  -->
+                    <phase>test</phase>
                         <configuration>
                             <excludes>
                                 <exclude>none</exclude>

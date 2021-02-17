@@ -28,19 +28,8 @@ public class FareCalculatorServiceTest {
     private static FareCalculatorService fareCalculatorService;
     private Ticket ticket;
     
-    private static ParkingSpotDAO parkingSpotDAO;
-    private static TicketDAO ticketDAO;
-    private static InputReaderUtil inputReaderUtil;
-   // @Mock
-  //  private static ParkingService parkingService;
-/**
-    @Mock
-    private static InputReaderUtil inputReaderUtil;
-    @Mock
-    private static ParkingSpotDAO parkingSpotDAO;
-    @Mock
-    private static TicketDAO ticketDAO;
- */   
+   
+  
     @BeforeAll
     private static void setUp() {
         fareCalculatorService = new FareCalculatorService();
@@ -216,18 +205,10 @@ public class FareCalculatorServiceTest {
        
         assertEquals( ticket.getId() , 2);
     }
-/**    
-    @Test
-    public void testLoyalFalse(){
-        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-        parkingService.processIncomingVehicle();
-        //TODO: check that a ticket is actualy saved in DB and Parking table is updated with availability
-        assertEquals( ticket.getIsLoyal() , false);
-    }
- */   
+
     @Test
     public void testParkingSpotMethodsId(){
-    	// parkingSpot = new ParkingSpot();
+    
     	 ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
     	 parkingSpot.setId(2);
     	 assertEquals(parkingSpot.getId() , 2);
@@ -235,7 +216,7 @@ public class FareCalculatorServiceTest {
     
     @Test
     public void testParkingSpotMethodsHashCode(){
-    	// parkingSpot = new ParkingSpot();
+    	
     	 ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
     	 parkingSpot.setId(2);
     	 assertEquals(parkingSpot.hashCode() , 2);
@@ -244,7 +225,7 @@ public class FareCalculatorServiceTest {
     
     @Test
     public void testParkingSpotMethodsType(){
-    	// parkingSpot = new ParkingSpot();
+    	
     	 ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
     	 parkingSpot.setParkingType(ParkingType.BIKE);
     	 assertEquals(parkingSpot.getParkingType() , ParkingType.BIKE);
@@ -252,7 +233,7 @@ public class FareCalculatorServiceTest {
     
     @Test
     public void testParkingSpotMethodsAvail(){
-    	// parkingSpot = new ParkingSpot();
+    	
     	 ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
     	 parkingSpot.setAvailable(true);
     	 assertEquals(parkingSpot.isAvailable() , true); 
@@ -260,9 +241,9 @@ public class FareCalculatorServiceTest {
     
     @Test
     public void testParkingSpotMethodsEqualTrue(){
-    	// parkingSpot = new ParkingSpot();
+    	
     	 ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
-    	// ParkingSpot o = new ParkingSpot(2, ParkingType.BIKE,true);
+    	
     	 ParkingSpot o = new ParkingSpot(1, ParkingType.CAR,false);
     	
     	 assertEquals(parkingSpot.equals(o) , true);  
@@ -270,71 +251,13 @@ public class FareCalculatorServiceTest {
     
     @Test
     public void testParkingSpotMethodsEqualFalse(){
-    	// parkingSpot = new ParkingSpot();
+    	
     	 ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
     	 ParkingSpot o = new ParkingSpot(2, ParkingType.BIKE,true);
     	
     	 assertEquals(parkingSpot.equals(o) , false);  
     }
     
-    /**
-    private void setUpPerTest() throws Exception {
-        when(inputReaderUtil.readSelection()).thenReturn(1);
-        when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
-        dataBasePrepareService.clearDataBaseEntries();
-    }
-   */ 
-    /**
-    @Test
-    public void testProcessIncomingVehicle()  {
-    //	when(parkingService.getNextParkingNumberIfAvailable()).thenReturn(new ParkingSpot(1, ParkingType.CAR,false));
-    //	System.out.println("mock ok");
-    	ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-    //	ParkingSpot parkingSpot;
-    	when(inputReaderUtil.readSelection()).thenReturn(1);
-    	when(parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR)).thenReturn(2);
-    	System.out.println("when done");
-    	//assertEquals(parkingService.processIncomingVehicle().parkingSpot.getId() , 2);
-    	parkingService.processIncomingVehicle();
-    	//System.out.println("getId()"+parkingService.processIncomingVehicle().parkingSpot.getId());
-    //	assertEquals(parkingService.getNextParkingNumberIfAvailable(),new ParkingSpot(2, ParkingType.CAR,true));
-    }
-    */
-  /**  copy in ParkingDataBaseIT
-    @Test
-    public void testParkingACar()  throws Exception {
-    	 when(inputReaderUtil.readSelection()).thenReturn(1);
-         //when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
-        
-         when(parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR)).thenReturn(2);
-         when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
-    	
-    	ParkingSpot parkingSpot = new ParkingSpot(2, ParkingType.CAR,false);
-        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-        parkingService.processIncomingVehicle();
-     
-        assertEquals(parkingService.getNextParkingNumberIfAvailable(),parkingSpot);
-    }
-    
-    @Test
-    public void testParkingLotExit() throws Exception{
-    	when(ticketDAO.getTicket("ABCDEF")).thenReturn(ticket);
-    	ParkingSpot parkingSpot = new ParkingSpot(2, ParkingType.CAR,false);
-    	Date inTime = new Date();
-         inTime.setTime( System.currentTimeMillis() - (  90 * 60 * 1000) );//1,5 hour parking time 
-         ticket.setId(22);
-         ticket.setInTime(inTime);
-         ticket.setParkingSpot(parkingSpot);
-         ticket.setIsLoyal(false);
-    	
-    	
-        testParkingACar();
-        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-        parkingService.processExitingVehicle();
-       
-        assertEquals( (1.5 * Fare.CAR_RATE_PER_HOUR ) , (int)(ticket.getPrice()*100)/100.0);
-        //TODO: check that the fare generated and out time are populated correctly in the database
-    }
-  */  
+   
     
 }

@@ -92,8 +92,9 @@ public class ParkingDataBaseIT {
         parkingService.processIncomingVehicle();
         parkingService.processExitingVehicle();
        
-        assertEquals( (1.5 * Fare.CAR_RATE_PER_HOUR ) , (int)(ticket.getPrice()*100)/100.0);
-        System.out.println("Out Time is:" + ticket.getOutTime());
+      //  assertEquals( (1.5 * Fare.CAR_RATE_PER_HOUR ) , (int)(ticket.getPrice()*100)/100.0);
+        assertEquals( (1.5 * Fare.CAR_RATE_PER_HOUR ) , (int)((ticketDAO.getTicket("ABCDEF")).getPrice()*100)/100.0);
+        
        
     }
     
@@ -107,7 +108,8 @@ public class ParkingDataBaseIT {
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
        
-        assertEquals( ticket.getIsLoyal() , true);
+       // assertEquals( ticket.getIsLoyal() , true);
+        assertEquals( (ticketDAO.getTicket("ABCDEF")).getIsLoyal() , true);
        
     } 
   

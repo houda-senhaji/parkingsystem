@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -82,7 +83,7 @@ class TicketDAOTest {
 	void testSaveTicket() throws Exception{
 		when(con.prepareStatement(DBConstants.SAVE_TICKET)).thenReturn(ps);
 		assertEquals(ticketDAO.saveTicket(ticket),false);
-	
+		
 		
 	}
 	
@@ -101,20 +102,17 @@ class TicketDAOTest {
 				
 		 Ticket ticketGen = ticketDAO.getTicket("ABCD");
 		 
-		 System.out.println("(ticketDAO.getTicket(\"ABCD\")).getInTime()" + ticketGen.getInTime());
-		 System.out.println("ticket.getInTime()" + ticket.getInTime());
-						
-		 DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");		
-		 System.out.println(format.format(ticket.getInTime()));
-		 System.out.println(format.format((ticketDAO.getTicket("ABCD")).getInTime()));
+					
+		 DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");	
+		 		
 		
 		 assertEquals(ticketGen.getId(),ticket.getId());
 		 assertEquals(ticketGen.getParkingSpot(),ticket.getParkingSpot());
 		 assertEquals(ticketGen.getVehicleRegNumber(),ticket.getVehicleRegNumber());
 		 assertEquals(ticketGen.getPrice(),ticket.getPrice());
-		// assertEquals(format.format(ticket.getInTime()),format.format((ticketGen).getInTime()));
+		 assertEquals(format.format(ticket.getInTime()),format.format((ticketGen).getInTime()));
 		 assertEquals(format.format(ticket.getOutTime()),format.format(ticketGen.getOutTime()));
-		 assertEquals(ticketGen.getIsLoyal(),ticket.getIsLoyal());
+		 
 		 
 	}
 	

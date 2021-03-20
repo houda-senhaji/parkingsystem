@@ -16,7 +16,7 @@ public class FareCalculatorService {
         long outHour = ticket.getOutTime().getTime();
         boolean isLoyal = ticket.getIsLoyal();
         double multCoef;
-        //TODO: Some tests are failing here. Need to check if this logic is correct
+        
         
         float duration = (float)(outHour - inHour)/(1000*60*60);
         
